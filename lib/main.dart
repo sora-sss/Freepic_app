@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class PixabayPage extends StatefulWidget {
-  const PixabayPage({super.key});
+  const PixabayPage({Key? key}) : super(key: key);
 
   @override
   State<PixabayPage> createState() => _PixabayPageState();
@@ -35,6 +35,11 @@ class _PixabayPageState extends State<PixabayPage> {
     );
     // 用意した imageList に hits の value を代入する
     imageList = response.data['hits'];
+    imageList.sort((a, b) {
+      final int aLikes = a['likes'];
+      final int bLikes = b['likes'];
+      return bLikes.compareTo(aLikes);
+    });
     setState(() {}); // 画面を更新したいので setState も呼んでおきます
   }
 
